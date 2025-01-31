@@ -17,3 +17,7 @@ df_saidas['Data'] = pd.to_datetime(df_saidas['Data'], dayfirst=True)
 df_saidas
 
 # Calcular os totais
+
+total_entradas = df_entradas['Valor'].sum()
+total_saidas = df_saidas['Valor'].sum()
+saldo_total = total_entradas - total_saidas
