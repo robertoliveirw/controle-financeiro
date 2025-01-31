@@ -112,9 +112,6 @@ if st.sidebar.button('Adicionar Entrada'):
 
         if st.form_submit_button("Salvar Entrada"):
             try:
-                # Carregar o arquivo de entradas
-                df_entradas = pd.read_csv('data/entradas.csv', sep=';', decimal='.')
-
                 # Adicionar os novos dados ao dataframe
                 new_entry = {
                     'Cliente': cliente_entrada,
@@ -124,6 +121,7 @@ if st.sidebar.button('Adicionar Entrada'):
                 }
 
                 # Adicionar a nova entrada
+                df_entradas = pd.read_csv('data/entradas.csv', sep=';', decimal='.')
                 df_entradas = df_entradas.append(new_entry, ignore_index=True)
 
                 # Salvar o dataframe atualizado de volta no arquivo CSV
@@ -144,9 +142,6 @@ if st.sidebar.button('Adicionar Saída'):
 
         if st.form_submit_button("Salvar Saída"):
             try:
-                # Carregar o arquivo de saídas
-                df_saidas = pd.read_csv('data/saidas.csv', sep=';', decimal='.')
-
                 # Adicionar os novos dados ao dataframe
                 new_exit = {
                     'Data': data_saida,
@@ -156,6 +151,7 @@ if st.sidebar.button('Adicionar Saída'):
                 }
 
                 # Adicionar a nova saída
+                df_saidas = pd.read_csv('data/saidas.csv', sep=';', decimal='.')
                 df_saidas = df_saidas.append(new_exit, ignore_index=True)
 
                 # Salvar o dataframe atualizado de volta no arquivo CSV
@@ -176,9 +172,6 @@ if st.sidebar.button('Adicionar Cliente'):
 
         if st.form_submit_button("Salvar Cliente"):
             try:
-                # Carregar o arquivo de clientes
-                df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
-
                 # Adicionar os novos dados ao dataframe
                 new_client = {
                     'Nome': nome_cliente,
@@ -188,6 +181,7 @@ if st.sidebar.button('Adicionar Cliente'):
                 }
 
                 # Adicionar o novo cliente
+                df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
                 df_clientes = df_clientes.append(new_client, ignore_index=True)
 
                 # Salvar o dataframe atualizado de volta no arquivo CSV
