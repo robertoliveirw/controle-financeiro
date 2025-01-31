@@ -1,4 +1,4 @@
-Id;Cliente;Item Comprado;Data da Entrada;Valor
+ÔªøId;Cliente;Item Comprado;Data da Entrada;Valor
 1;Ana Souza;Biscoito1;05/01/2025;58.90
 2;Bruno Lima;Biscoito3;12/01/2025;42.30
 3;Carla Mendes;Biscoito2;22/01/2025;61.50
@@ -8,20 +8,20 @@ Id;Cliente;Item Comprado;Data da Entrada;Valor
 7;Bruno Lima;Biscoito1;14/01/2025;55.60
 8;Gabriela Nunes;Biscoito3;06/01/2025;38.90
 9;Isabela Santos;Biscoito2;28/01/2025;64.70
-10;Jo„o Pereira;Biscoito1;19/01/2025;79.30
+10;Jo√£o Pereira;Biscoito1;19/01/2025;79.30
 11;Karen Costa;Biscoito3;10/01/2025;41.50
 12;Lucas Almeida;Biscoito2;11/01/2025;57.90
 13;Mariana Duarte;Biscoito1;20/01/2025;63.40
-14;Nat·lia Ribeiro;Biscoito3;26/01/2025;50.80
-15;Ot·vio Fernandes;Biscoito2;29/01/2025;110.00
-16;PatrÌcia Vasconcelos;Biscoito1;04/01/2025;37.20
+14;Nat√°lia Ribeiro;Biscoito3;26/01/2025;50.80
+15;Ot√°vio Fernandes;Biscoito2;29/01/2025;110.00
+16;Patr√≠cia Vasconcelos;Biscoito1;04/01/2025;37.20
 17;Rafael Teixeira;Biscoito3;08/01/2025;61.10
 18;Simone Barros;Biscoito2;27/01/2025;52.50
 19;Tiago Neves;Biscoito1;13/01/2025;85.60
 20;Vanessa Monteiro;Biscoito3;15/01/2025;45.30
 21;William Castro;Biscoito2;21/01/2025;54.20
 22;Yasmin Lopes;Biscoito1;02/01/2025;66.70
-23;ZÈ Ricardo;Biscoito3;07/01/2025;51.90
+23;Z√© Ricardo;Biscoito3;07/01/2025;51.90
 24;Alice Campos;Biscoito2;23/01/2025;44.80
 25;Bernardo Vasques;Biscoito1;30/01/2025;70.50
 26;Bruno Lima;Biscoito3;17/01/2025;62.90
@@ -37,13 +37,13 @@ Id;Cliente;Item Comprado;Data da Entrada;Valor
 36;Bruno Lima;Biscoito2;05/01/2025;57.30
 37;Gabriela Nunes;Biscoito1;20/01/2025;71.90
 38;Isabela Santos;Biscoito3;11/01/2025;52.60
-39;Jo„o Pereira;Biscoito2;08/01/2025;65.70
+39;Jo√£o Pereira;Biscoito2;08/01/2025;65.70
 40;Karen Costa;Biscoito1;16/01/2025;48.40
 41;Lucas Almeida;Biscoito3;13/01/2025;59.50
 42;Mariana Duarte;Biscoito2;27/01/2025;72.30
-43;Nat·lia Ribeiro;Biscoito1;07/01/2025;50.20
-44;Ot·vio Fernandes;Biscoito3;26/01/2025;61.80
-45;PatrÌcia Vasconcelos;Biscoito2;19/01/2025;55.90
+43;Nat√°lia Ribeiro;Biscoito1;07/01/2025;50.20
+44;Ot√°vio Fernandes;Biscoito3;26/01/2025;61.80
+45;Patr√≠cia Vasconcelos;Biscoito2;19/01/2025;55.90
 46;Rafael Teixeira;Biscoito1;10/01/2025;67.30
 47;Simone Barros;Biscoito3;21/01/2025;43.90
 48;Tiago Neves;Biscoito2;25/01/2025;62.10
