@@ -1,6 +1,7 @@
 import streamlit as st  
 import pandas as pd
 import plotly.graph_objects as go
+import plotly_express as px
 
 st.set_page_config(layout='wide')
 
@@ -52,33 +53,33 @@ total_saidas = df_saidas_filtrado['Valor'].sum()
 saldo_total = total_entradas - total_saidas
 
 # Criar os quadros com Plotly
-fig = go.Figure()
+fig_caixa = go.Figure()
 
-fig.add_trace(go.Indicator(
+fig_caixa.add_trace(go.Indicator(
     mode="number",
     value=total_entradas,
     title={"text": "Entradas (R$)"},
     domain={'row': 0, 'column': 0}
 ))
 
-fig.add_trace(go.Indicator(
+fig_caixa.add_trace(go.Indicator(
     mode="number",
     value=total_saidas,
     title={"text": "Saídas (R$)"},
     domain={'row': 0, 'column': 1}
 ))
 
-fig.add_trace(go.Indicator(
+fig_caixa.add_trace(go.Indicator(
     mode="number",
     value=saldo_total,
     title={"text": "Saldo (R$)"},
     domain={'row': 0, 'column': 2}
 ))
 
-fig.update_layout(
+fig_caixa.update_layout(
     grid={'rows': 1, 'columns': 3, 'pattern': "independent"},
     template="plotly_white"
 )
 
 # Exibir o gráfico
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig_caixa, use_container_width=True)
