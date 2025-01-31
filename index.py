@@ -23,7 +23,11 @@ saldo_total = total_entradas - total_saidas
 # Título
 st.title('Baskuit - Acompanhamento Financeiro')
 
-
+# Descrição
+st.write('''
+        • Entradas 💵: Acompanhe o total de receitas geradas, com dados atualizados para um controle preciso do fluxo de caixa. \n
+        • Saídas 💸: Monitore as despesas e saídas de recursos, ajudando a identificar áreas de custos. \n
+        • Saldo 📉📈: Veja o saldo atual, com a diferença entre entradas e saídas, para garantir a saúde financeira.''')
 
 # Criar os quadros com Plotly
 fig = go.Figure()
