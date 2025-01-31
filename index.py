@@ -7,7 +7,7 @@ st.set_page_config(layout='wide')
 
 # HEADER
 # Título
-st.title('Baskuit - Acompanhamento Financeiro')
+st.title('Baskuit - Acompanhamento Financeiro - Teste')
 
 # Carregar dados
 df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
