@@ -9,12 +9,6 @@ st.set_page_config(layout='wide')
 # Título
 st.title('Baskuit - Acompanhamento Financeiro')
 
-# Descrição
-st.write(''' 
-        • Entradas 💵: Acompanhe o total de receitas geradas, com dados atualizados para um controle preciso do fluxo de caixa. \n 
-        • Saídas 💸: Monitore as despesas e saídas de recursos, ajudando a identificar áreas de custos. \n 
-        • Saldo 📉📈: Veja o saldo atual, com a diferença entre entradas e saídas, para garantir a saúde financeira.''')
-
 # Carregar dados
 df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
 df_clientes['Aniversario'] = pd.to_datetime(df_clientes['Aniversario'], dayfirst=True)
@@ -76,7 +70,8 @@ fig_caixa.update_layout(
     template="plotly_white"
 )
 
-# Exibir o gráfico de indicadores
+# Organizar os gráficos por linha
+# Primeiro, exibimos os gráficos de indicadores (entradas, saídas, saldo)
 st.plotly_chart(fig_caixa, use_container_width=True)
 
 # Preparar os dados para o gráfico de linhas
@@ -102,5 +97,64 @@ fig_linhas = px.line(
     title="Entradas e Saídas ao Longo do Tempo"
 )
 
-# Exibir o gráfico de linhas
+# Exibir o gráfico de linhas abaixo dos indicadores
 st.plotly_chart(fig_linhas, use_container_width=True)
+
+# Criar os botões na barra lateral com chaves únicas
+col1, col2, col3 = st.sidebar.columns([1, 1, 1])
+
+# Adicionar Entrada
+with col1:
+    with st.form(key='form_entrada'):
+        if st.button('Adicionar Entrada', key='entrada'):
+            st.subheader("Adicionar Entrada")
+            id_entrada = st.number_input("ID da Entrada", min_value=1, step=1)
+            cliente_entrada = st.text_input("Cliente")
+            item_comprado = st.text_input("Item Comprado")
+            data_entrada = st.date_input("Data da Entrada", min_value=pd.to_datetime('2020-01-01'))
+            valor_entrada = st.number_input("Valor da Entrada (R$)", min_value=0.0, format="%.2f")
+
+            if st.form_submit_button("Salvar Entrada"):
+                # Salvar no arquivo CSV
+                df_entradas = pd.read_csv('data/entradas.csv', sep=';', decimal='.')
+                new_entry = {'Id': id_entrada, 'Cliente': cliente_entrada, 'Item Comprado': item_comprado, 'Data da Entrada': data_entrada, 'Valor': valor_entrada}
+                df_entradas = df_entradas.append(new_entry, ignore_index=True)
+                df_entradas.to_csv('data/entradas.csv', sep=';', decimal='.', index=False)
+                st.success("Entrada adicionada com sucesso!")
+
+# Adicionar Saída
+with col2:
+    with st.form(key='form_saida'):
+        if st.button('Adicionar Saída', key='saida'):
+            st.subheader("Adicionar Saída")
+            data_saida = st.date_input("Data da Saída", min_value=pd.to_datetime('2020-01-01'))
+            local_saida = st.text_input("Local")
+            item_saida = st.text_input("Item")
+            valor_saida = st.number_input("Valor da Saída (R$)", min_value=0.0, format="%.2f")
+
+            if st.form_submit_button("Salvar Saída"):
+                # Salvar no arquivo CSV
+                df_saidas = pd.read_csv('data/saidas.csv', sep=';', decimal='.')
+                new_exit = {'Data': data_saida, 'Local': local_saida, 'Item': item_saida, 'Valor': valor_saida}
+                df_saidas = df_saidas.append(new_exit, ignore_index=True)
+                df_saidas.to_csv('data/saidas.csv', sep=';', decimal='.', index=False)
+                st.success("Saída adicionada com sucesso!")
+
+# Adicionar Cliente
+with col3:
+    with st.form(key='form_cliente'):
+        if st.button('Adicionar Cliente', key='cliente'):
+            st.subheader("Adicionar Cliente")
+            id_cliente = st.number_input("ID do Cliente", min_value=1, step=1)
+            nome_cliente = st.text_input("Nome do Cliente")
+            aniversario_cliente = st.date_input("Data de Aniversário")
+            contato_cliente = st.text_input("Contato")
+            instagram_cliente = st.text_input("Instagram")
+
+            if st.form_submit_button("Salvar Cliente"):
+                # Salvar no arquivo CSV
+                df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
+                new_client = {'Id': id_cliente, 'Nome': nome_cliente, 'Aniversario': aniversario_cliente, 'Contato': contato_cliente, 'Instagram': instagram_cliente}
+                df_clientes = df_clientes.append(new_client, ignore_index=True)
+                df_clientes.to_csv('data/clientes.csv', sep=';', decimal='.', index=False)
+                st.success("Cliente adicionado com sucesso!")
