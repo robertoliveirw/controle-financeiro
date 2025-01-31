@@ -1,4 +1,4 @@
-import streamlit as st  
+import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
@@ -100,10 +100,8 @@ fig_linhas = px.line(
 # Exibir o gráfico de linhas abaixo dos indicadores
 st.plotly_chart(fig_linhas, use_container_width=True)
 
-# Criar os botões na barra lateral com chaves únicas
-col1, col2, col3 = st.sidebar.columns([1, 1, 1])
-
-# Botão para Adicionar Entrada
+# Botões para adicionar entradas, saídas e clientes
+# Criar os botões na barra lateral
 if st.sidebar.button('Adicionar Entrada'):
     with st.form(key='form_entrada'):
         st.subheader("Adicionar Entrada")
@@ -114,14 +112,30 @@ if st.sidebar.button('Adicionar Entrada'):
         valor_entrada = st.number_input("Valor da Entrada (R$)", min_value=0.0, format="%.2f")
 
         if st.form_submit_button("Salvar Entrada"):
-            # Salvar no arquivo CSV
-            df_entradas = pd.read_csv('data/entradas.csv', sep=';', decimal='.')
-            new_entry = {'Id': id_entrada, 'Cliente': cliente_entrada, 'Item Comprado': item_comprado, 'Data da Entrada': data_entrada, 'Valor': valor_entrada}
-            df_entradas = df_entradas.append(new_entry, ignore_index=True)
-            df_entradas.to_csv('data/entradas.csv', sep=';', decimal='.', index=False)
-            st.success("Entrada adicionada com sucesso!")
+            try:
+                # Carregar o arquivo de entradas
+                df_entradas = pd.read_csv('data/entradas.csv', sep=';', decimal='.')
 
-# Botão para Adicionar Saída
+                # Adicionar os novos dados ao dataframe
+                new_entry = {
+                    'Id': id_entrada,
+                    'Cliente': cliente_entrada,
+                    'Item Comprado': item_comprado,
+                    'Data da Entrada': data_entrada,
+                    'Valor': valor_entrada
+                }
+
+                # Adicionar a nova entrada
+                df_entradas = df_entradas.append(new_entry, ignore_index=True)
+
+                # Salvar o dataframe atualizado de volta no arquivo CSV
+                df_entradas.to_csv('data/entradas.csv', sep=';', decimal='.', index=False)
+
+                st.success("Entrada adicionada com sucesso!")
+            except Exception as e:
+                st.error(f"Erro ao salvar a entrada: {e}")
+
+
 if st.sidebar.button('Adicionar Saída'):
     with st.form(key='form_saida'):
         st.subheader("Adicionar Saída")
@@ -131,14 +145,29 @@ if st.sidebar.button('Adicionar Saída'):
         valor_saida = st.number_input("Valor da Saída (R$)", min_value=0.0, format="%.2f")
 
         if st.form_submit_button("Salvar Saída"):
-            # Salvar no arquivo CSV
-            df_saidas = pd.read_csv('data/saidas.csv', sep=';', decimal='.')
-            new_exit = {'Data': data_saida, 'Local': local_saida, 'Item': item_saida, 'Valor': valor_saida}
-            df_saidas = df_saidas.append(new_exit, ignore_index=True)
-            df_saidas.to_csv('data/saidas.csv', sep=';', decimal='.', index=False)
-            st.success("Saída adicionada com sucesso!")
+            try:
+                # Carregar o arquivo de saídas
+                df_saidas = pd.read_csv('data/saidas.csv', sep=';', decimal='.')
 
-# Botão para Adicionar Cliente
+                # Adicionar os novos dados ao dataframe
+                new_exit = {
+                    'Data': data_saida,
+                    'Local': local_saida,
+                    'Item': item_saida,
+                    'Valor': valor_saida
+                }
+
+                # Adicionar a nova saída
+                df_saidas = df_saidas.append(new_exit, ignore_index=True)
+
+                # Salvar o dataframe atualizado de volta no arquivo CSV
+                df_saidas.to_csv('data/saidas.csv', sep=';', decimal='.', index=False)
+
+                st.success("Saída adicionada com sucesso!")
+            except Exception as e:
+                st.error(f"Erro ao salvar a saída: {e}")
+
+
 if st.sidebar.button('Adicionar Cliente'):
     with st.form(key='form_cliente'):
         st.subheader("Adicionar Cliente")
@@ -149,9 +178,25 @@ if st.sidebar.button('Adicionar Cliente'):
         instagram_cliente = st.text_input("Instagram")
 
         if st.form_submit_button("Salvar Cliente"):
-            # Salvar no arquivo CSV
-            df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
-            new_client = {'Id': id_cliente, 'Nome': nome_cliente, 'Aniversario': aniversario_cliente, 'Contato': contato_cliente, 'Instagram': instagram_cliente}
-            df_clientes = df_clientes.append(new_client, ignore_index=True)
-            df_clientes.to_csv('data/clientes.csv', sep=';', decimal='.', index=False)
-            st.success("Cliente adicionado com sucesso!")
+            try:
+                # Carregar o arquivo de clientes
+                df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
+
+                # Adicionar os novos dados ao dataframe
+                new_client = {
+                    'Id': id_cliente,
+                    'Nome': nome_cliente,
+                    'Aniversario': aniversario_cliente,
+                    'Contato': contato_cliente,
+                    'Instagram': instagram_cliente
+                }
+
+                # Adicionar o novo cliente
+                df_clientes = df_clientes.append(new_client, ignore_index=True)
+
+                # Salvar o dataframe atualizado de volta no arquivo CSV
+                df_clientes.to_csv('data/clientes.csv', sep=';', decimal='.', index=False)
+
+                st.success("Cliente adicionado com sucesso!")
+            except Exception as e:
+                st.error(f"Erro ao salvar o cliente: {e}")
