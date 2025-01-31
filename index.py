@@ -1,7 +1,7 @@
 import streamlit as st  
 import pandas as pd
 import plotly.graph_objects as go
-import plotly_express as px
+import plotly.express as px
 
 st.set_page_config(layout='wide')
 
@@ -23,12 +23,7 @@ df_entradas = pd.read_csv('data/entradas.csv', sep=';', decimal='.')
 df_entradas['Data da Entrada'] = pd.to_datetime(df_entradas['Data da Entrada'], dayfirst=True)
 
 df_saidas = pd.read_csv('data/saidas.csv', sep=';', decimal='.')
-df_saidas['Data'] = pd.to_datetime(df_saidas['Data'], dayfirst=True)   
-
-# Calcular os totais
-total_entradas = df_entradas['Valor'].sum()
-total_saidas = df_saidas['Valor'].sum()
-saldo_total = total_entradas - total_saidas
+df_saidas['Data'] = pd.to_datetime(df_saidas['Data'], dayfirst=True)
 
 # Converter as datas para datetime no formato correto
 start_date = df_entradas['Data da Entrada'].min().to_pydatetime()
@@ -81,5 +76,31 @@ fig_caixa.update_layout(
     template="plotly_white"
 )
 
-# Exibir o gráfico
+# Exibir o gráfico de indicadores
 st.plotly_chart(fig_caixa, use_container_width=True)
+
+# Preparar os dados para o gráfico de linhas
+df_entradas_filtrado_grouped = df_entradas_filtrado.groupby('Data da Entrada').agg({'Valor': 'sum'}).reset_index()
+df_entradas_filtrado_grouped['Tipo'] = 'Entrada'  # Adicionar coluna para identificar entradas
+
+df_saidas_filtrado_grouped = df_saidas_filtrado.groupby('Data').agg({'Valor': 'sum'}).reset_index()
+df_saidas_filtrado_grouped['Tipo'] = 'Saída'  # Adicionar coluna para identificar saídas
+
+# Renomear a coluna 'Data' para 'Data da Entrada' nas saídas para combinar com as entradas
+df_saidas_filtrado_grouped = df_saidas_filtrado_grouped.rename(columns={'Data': 'Data da Entrada'})
+
+# Concatenando as entradas e saídas para o gráfico
+df_combined = pd.concat([df_entradas_filtrado_grouped, df_saidas_filtrado_grouped], axis=0, ignore_index=True)
+
+# Criar o gráfico de linhas
+fig_linhas = px.line(
+    df_combined,
+    x="Data da Entrada",  # Eixo X será a data
+    y="Valor",             # Eixo Y será o valor
+    color="Tipo",          # As linhas serão diferenciadas pelo tipo (entrada ou saída)
+    labels={"Valor": "Valor (R$)", "Data da Entrada": "Data"},
+    title="Entradas e Saídas ao Longo do Tempo"
+)
+
+# Exibir o gráfico de linhas
+st.plotly_chart(fig_linhas, use_container_width=True)
