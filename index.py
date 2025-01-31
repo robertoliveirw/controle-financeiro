@@ -1,5 +1,7 @@
 import streamlit as st  
 import pandas as pd
+import plotly.graph_objects as go
+
 
 st.set_page_config(layout='wide')
 
@@ -24,3 +26,4 @@ col4, col5 = st.columns(2)
 total_entradas = df_entradas['Valor'].sum()
 total_saidas = df_saidas['Valor'].sum()
 saldo_total = total_entradas - total_saidas
+
