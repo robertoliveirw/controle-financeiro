@@ -20,6 +20,11 @@ total_entradas = df_entradas['Valor'].sum()
 total_saidas = df_saidas['Valor'].sum()
 saldo_total = total_entradas - total_saidas
 
+# Título
+st.title('Baskuit - Acompanhamento Financeiro')
+
+
+
 # Criar os quadros com Plotly
 fig = go.Figure()
 
