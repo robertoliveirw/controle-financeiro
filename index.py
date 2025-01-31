@@ -16,8 +16,11 @@ df_saidas = pd.read_csv('data\saidas.csv', sep=';', decimal='.')
 df_saidas['Data'] = pd.to_datetime(df_saidas['Data'], dayfirst=True)
 df_saidas
 
-# Calcular os totais
+# Separando espaços
+col1, col2, col3 = st.coluns(3)
+col4, col5 = st.columns(2)
 
+# Calcular os totais
 total_entradas = df_entradas['Valor'].sum()
 total_saidas = df_saidas['Valor'].sum()
 saldo_total = total_entradas - total_saidas
