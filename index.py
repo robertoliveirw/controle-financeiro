@@ -4,6 +4,16 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout='wide')
 
+# HEADER
+# Título
+st.title('Baskuit - Acompanhamento Financeiro')
+
+# Descrição
+st.write(''' 
+        • Entradas 💵: Acompanhe o total de receitas geradas, com dados atualizados para um controle preciso do fluxo de caixa. \n 
+        • Saídas 💸: Monitore as despesas e saídas de recursos, ajudando a identificar áreas de custos. \n 
+        • Saldo 📉📈: Veja o saldo atual, com a diferença entre entradas e saídas, para garantir a saúde financeira.''')
+
 # Carregar dados
 df_clientes = pd.read_csv('data/clientes.csv', sep=';', decimal='.')
 df_clientes['Aniversario'] = pd.to_datetime(df_clientes['Aniversario'], dayfirst=True)
@@ -18,15 +28,6 @@ df_saidas['Data'] = pd.to_datetime(df_saidas['Data'], dayfirst=True)
 total_entradas = df_entradas['Valor'].sum()
 total_saidas = df_saidas['Valor'].sum()
 saldo_total = total_entradas - total_saidas
-
-# Título
-st.title('Baskuit - Acompanhamento Financeiro')
-
-# Descrição
-st.write(''' 
-        • Entradas 💵: Acompanhe o total de receitas geradas, com dados atualizados para um controle preciso do fluxo de caixa. \n 
-        • Saídas 💸: Monitore as despesas e saídas de recursos, ajudando a identificar áreas de custos. \n 
-        • Saldo 📉📈: Veja o saldo atual, com a diferença entre entradas e saídas, para garantir a saúde financeira.''')
 
 # Converter as datas para datetime no formato correto
 start_date = df_entradas['Data da Entrada'].min().to_pydatetime()
