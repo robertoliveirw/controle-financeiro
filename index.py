@@ -105,7 +105,6 @@ st.plotly_chart(fig_linhas, use_container_width=True)
 if st.sidebar.button('Adicionar Entrada'):
     with st.form(key='form_entrada'):
         st.subheader("Adicionar Entrada")
-        id_entrada = st.number_input("ID da Entrada", min_value=1, step=1)
         cliente_entrada = st.text_input("Cliente")
         item_comprado = st.text_input("Item Comprado")
         data_entrada = st.date_input("Data da Entrada", min_value=pd.to_datetime('2020-01-01'))
@@ -118,7 +117,6 @@ if st.sidebar.button('Adicionar Entrada'):
 
                 # Adicionar os novos dados ao dataframe
                 new_entry = {
-                    'Id': id_entrada,
                     'Cliente': cliente_entrada,
                     'Item Comprado': item_comprado,
                     'Data da Entrada': data_entrada,
@@ -171,7 +169,6 @@ if st.sidebar.button('Adicionar Saída'):
 if st.sidebar.button('Adicionar Cliente'):
     with st.form(key='form_cliente'):
         st.subheader("Adicionar Cliente")
-        id_cliente = st.number_input("ID do Cliente", min_value=1, step=1)
         nome_cliente = st.text_input("Nome do Cliente")
         aniversario_cliente = st.date_input("Data de Aniversário")
         contato_cliente = st.text_input("Contato")
@@ -184,7 +181,6 @@ if st.sidebar.button('Adicionar Cliente'):
 
                 # Adicionar os novos dados ao dataframe
                 new_client = {
-                    'Id': id_cliente,
                     'Nome': nome_cliente,
                     'Aniversario': aniversario_cliente,
                     'Contato': contato_cliente,
